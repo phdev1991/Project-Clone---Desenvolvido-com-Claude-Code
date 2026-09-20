@@ -1,0 +1,158 @@
+[    1860ms] [WARNING] Failed parsing 'srcset' attribute value since its 'w' descriptor is invalid. @ :0
+[    1861ms] [WARNING] Dropped srcset candidate "//www.gibson.com/cdn/shop/files/preview_images/ba2b7899827a463cad719f3ee9e26bae.thumbnail.0000000000.jpg?v=1781532868" @ :0
+[    1861ms] [WARNING] Failed parsing 'srcset' attribute value since its 'w' descriptor is invalid. @ :0
+[    1861ms] [WARNING] Dropped srcset candidate "//www.gibson.com/cdn/shop/files/preview_images/ba2b7899827a463cad719f3ee9e26bae.thumbnail.0000000000.jpg?v=1781532868" @ :0
+[    1862ms] [WARNING] Failed parsing 'srcset' attribute value since its 'w' descriptor is invalid. @ :0
+[    1862ms] [WARNING] Dropped srcset candidate "//www.gibson.com/cdn/shop/files/preview_images/ba2b7899827a463cad719f3ee9e26bae.thumbnail.0000000000.jpg?v=1781532868" @ :0
+[    3129ms] [LOG]  @ https://www.gibson.com/:16923
+[    3199ms] Unexpected token ','
+[    3257ms] [LOG] %c Powerful Contact Form Builder %c
+%c✨ Top 1 Form App for Shopify (2026)
+🌍 Trusted by 50,000+ global merchants
+🧩 Build stunning, fully customizable contact forms in minutes
+⚡ Capture leads, feedback & inquiries effortlessly — no coding required
+Learn more:%c%s background: linear-gradient(90deg,rgb(0, 126, 96) 0%,rgb(9, 189, 147) 40%,rgb(87, 177, 98) 100%);color: white;padding: 6px 10px;border-radius: 4px;font-weight: 800;font-family: "Segoe UI", Roboto, Menlo, monospace;font-size: 15px;box-shadow: 0 3px 0 rgba(0,0,0,0.12), inset 0 -4px 12px rgba(255,255,255,0.06);display: inline-block font-family: Menlo, Monaco, Consolas, "Courier New", monospace;font-weight: 700;color: #0b4626;font-size: 14px;display: inline-block;vertical-align: middle display:block;font-family: Menlo, Monaco, Consolas, "Courier New", monospace;font-size: 13px;line-height: 1.5;padding-top: 8px display:block;font-family: Menlo, Monaco, Consolas, "Courier New", monospace;font-size: 12px;text-decoration: underline;color: #1a57d6;font-weight: 600 https://apps.shopify.com/form-builder-contact-form?utm_source=storefront-console&utm_medium=console&utm_campaign=gigf&utm_content=learn-more&utm_term=59d3bb-c6.myshopify.com @ https://cdn.shopify.com/extensions/01a0ae45-945d-7977-bbd8-e77d3e026255/powerful-form-builder-354/assets/globo.formbuilder.index.js:0
+[    3274ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3274ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3274ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3275ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3276ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3276ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3276ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3276ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3276ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3277ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3277ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3277ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3277ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3277ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3332ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://www.gibson.com/web-pixels@1b3c7779w6e1f7d30p7ae783d3m9b5a05aa/custom/web-pixel-49545395@203/sandbox/modern/:6
+[    3363ms] [LOG] [CartItems] Setting up quantity selectors: {count: 0, selectors: Array(0)} @ https://www.gibson.com/cdn/shop/t/592/assets/cart.js?v=75561103198306739421789482453:0
+[    3364ms] [LOG] [CartItems] Debug: Setting up debug buttons @ https://www.gibson.com/cdn/shop/t/592/assets/cart.js?v=75561103198306739421789482453:0
+[    3418ms] [WARNING] Algolia AI Search & Discovery: this store uses version 5 of the Algolia search client with a compatibility layer for version 4 code. The compatibility layer is removed on February 14, 2027. @ https://cdn.shopify.com/extensions/01a0b0d0-5b4e-75c9-9538-927dc23cc42a/ab273f809a5da1f7468216e787f20c950431cc24-36611/assets/algolia_autocomplete.js:119
+[    3480ms] [LOG] [stoq-pixel] initialized, shop: 59d3bb-c6.myshopify.com @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:1
+[    3481ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3482ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3482ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3520ms] [INFO] Customer Privacy API is loaded @ https://cdn.shopify.com/extensions/01a061ba-09b8-7f28-a51f-be55b3ced758/onetrust-consent-management-67/assets/storefront-consent.js:35
+[    3511ms] [LOG] [stoq-pixel] sessionId set (rank 3): 916f065b... @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:1
+[    3524ms] [LOG] [stoq-pixel] initialized {cart_token: , page_url: https://www.gibson.com/, page_type: index, shop_domain: 59d3bb-c6.myshopify.com, market_id: 29434675379} @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[    3608ms] [LOG] [stoq-pixel] bundle_ready {page_url: https://www.gibson.com/, page_type: index, shop_domain: 59d3bb-c6.myshopify.com, market_id: 29434675379, cart_token: } @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[    3702ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    3915ms] [LOG] [stoq-pixel] sweep_ran {page_url: https://www.gibson.com/, page_type: index, market_id: 29434675379, cart_token: , app_version: 588} @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[    3947ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    4022ms] [LOG] [stoq-pixel] consent updated, analyticsAllowed: false @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[    4222ms] Uncaught SyntaxError: "undefined" is not valid JSON
+    at <anonymous> (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:8:131329)
+    at Ko (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:52314)
+    at useState (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:60341)
+    at e.useState (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:0:11502)
+    at mo (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:8:131307)
+    at Co (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:47525)
+    at mc (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:70034)
+    at jc (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:80295)
+    at Mu (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:115695)
+    at ku (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:114776)
+    at Ou (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:114614)
+    at gu (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:111479)
+    at cd (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:123000)
+    at w (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:0:2209)
+[    4220ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[    4393ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11275ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11291ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11292ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11307ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11324ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11324ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11342ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   11357ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   12526ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   12572ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   12596ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   12842ms] [LOG] [stoq-pixel] consent updated, analyticsAllowed: true @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[   12844ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   13422ms] [INFO] Clear-Site-Data header on 'https://www.gibson.com/cart/update.js': Cleared data types: "prefetchCache", "prerenderCache". @ https://www.gibson.com/:0
+[   17308ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   17325ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   18142ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   18159ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   18159ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   18325ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   18342ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   22216ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   22225ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   24259ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   24276ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   24276ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   24292ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   24309ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   24326ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   24343ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26398ms] [WARNING] Failed parsing 'srcset' attribute value since its 'w' descriptor is invalid. @ :0
+[   26399ms] [WARNING] Dropped srcset candidate "//www.gibson.com/cdn/shop/files/preview_images/ba2b7899827a463cad719f3ee9e26bae.thumbnail.0000000000.jpg?v=1781532868" @ :0
+[   26399ms] [WARNING] Failed parsing 'srcset' attribute value since its 'w' descriptor is invalid. @ :0
+[   26400ms] [WARNING] Dropped srcset candidate "//www.gibson.com/cdn/shop/files/preview_images/ba2b7899827a463cad719f3ee9e26bae.thumbnail.0000000000.jpg?v=1781532868" @ :0
+[   26400ms] [WARNING] Failed parsing 'srcset' attribute value since its 'w' descriptor is invalid. @ :0
+[   26400ms] [WARNING] Dropped srcset candidate "//www.gibson.com/cdn/shop/files/preview_images/ba2b7899827a463cad719f3ee9e26bae.thumbnail.0000000000.jpg?v=1781532868" @ :0
+[   26484ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://www.gibson.com/web-pixels@1b3c7779w6e1f7d30p7ae783d3m9b5a05aa/custom/web-pixel-49545395@203/sandbox/modern/:6
+[   26484ms] [LOG]  @ https://www.gibson.com/:16923
+[   26545ms] Unexpected token ','
+[   26591ms] [LOG] %c Powerful Contact Form Builder %c
+%c✨ Top 1 Form App for Shopify (2026)
+🌍 Trusted by 50,000+ global merchants
+🧩 Build stunning, fully customizable contact forms in minutes
+⚡ Capture leads, feedback & inquiries effortlessly — no coding required
+Learn more:%c%s background: linear-gradient(90deg,rgb(0, 126, 96) 0%,rgb(9, 189, 147) 40%,rgb(87, 177, 98) 100%);color: white;padding: 6px 10px;border-radius: 4px;font-weight: 800;font-family: "Segoe UI", Roboto, Menlo, monospace;font-size: 15px;box-shadow: 0 3px 0 rgba(0,0,0,0.12), inset 0 -4px 12px rgba(255,255,255,0.06);display: inline-block font-family: Menlo, Monaco, Consolas, "Courier New", monospace;font-weight: 700;color: #0b4626;font-size: 14px;display: inline-block;vertical-align: middle display:block;font-family: Menlo, Monaco, Consolas, "Courier New", monospace;font-size: 13px;line-height: 1.5;padding-top: 8px display:block;font-family: Menlo, Monaco, Consolas, "Courier New", monospace;font-size: 12px;text-decoration: underline;color: #1a57d6;font-weight: 600 https://apps.shopify.com/form-builder-contact-form?utm_source=storefront-console&utm_medium=console&utm_campaign=gigf&utm_content=learn-more&utm_term=59d3bb-c6.myshopify.com @ https://cdn.shopify.com/extensions/01a0ae45-945d-7977-bbd8-e77d3e026255/powerful-form-builder-354/assets/globo.formbuilder.index.js:0
+[   26601ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26602ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26635ms] [LOG] [CartItems] Setting up quantity selectors: {count: 0, selectors: Array(0)} @ https://www.gibson.com/cdn/shop/t/592/assets/cart.js?v=75561103198306739421789482453:0
+[   26636ms] [LOG] [CartItems] Debug: Setting up debug buttons @ https://www.gibson.com/cdn/shop/t/592/assets/cart.js?v=75561103198306739421789482453:0
+[   26675ms] [LOG] [stoq-pixel] initialized, shop: 59d3bb-c6.myshopify.com @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:1
+[   26681ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26681ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26703ms] [LOG] [stoq-pixel] sessionId set (rank 3): 916f065b... @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:1
+[   26713ms] [INFO] Customer Privacy API is loaded @ https://cdn.shopify.com/extensions/01a061ba-09b8-7f28-a51f-be55b3ced758/onetrust-consent-management-67/assets/storefront-consent.js:35
+[   26723ms] [WARNING] Algolia AI Search & Discovery: this store uses version 5 of the Algolia search client with a compatibility layer for version 4 code. The compatibility layer is removed on February 14, 2027. @ https://cdn.shopify.com/extensions/01a0b0d0-5b4e-75c9-9538-927dc23cc42a/ab273f809a5da1f7468216e787f20c950431cc24-36611/assets/algolia_autocomplete.js:119
+[   26773ms] [LOG] [stoq-pixel] initialized {cart_token: hWNH2C0QRog8lkvGYcVs8H8E?key=f5bda490de7813605ca24e0573f97339, page_url: https://www.gibson.com/, page_type: index, shop_domain: 59d3bb-c6.myshopify.com, market_id: 29434675379} @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[   26774ms] [LOG] [stoq-pixel] bundle_ready {page_url: https://www.gibson.com/, page_type: index, shop_domain: 59d3bb-c6.myshopify.com, market_id: 29434675379, cart_token: hWNH2C0QRog8lkvGYcVs8H8E?key=f5bda490de7813605ca24e0573f97339} @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[   26876ms] Uncaught SyntaxError: "undefined" is not valid JSON
+    at <anonymous> (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:8:131329)
+    at Ko (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:52314)
+    at useState (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:60341)
+    at e.useState (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:0:11502)
+    at mo (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:8:131307)
+    at Co (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:47525)
+    at mc (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:70034)
+    at jc (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:80295)
+    at Mu (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:115695)
+    at ku (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:114776)
+    at Ou (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:114614)
+    at gu (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:111479)
+    at cd (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:7:123000)
+    at w (https://cdn.shopify.com/extensions/01a08aef-c943-7c76-b51e-486a8514d228/narvar-extensions-243/assets/shipping-protection-cart-widget.js:0:2209)
+[   26876ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   26887ms] [LOG] [stoq-pixel] sweep_ran {page_url: https://www.gibson.com/, page_type: index, market_id: 29434675379, cart_token: hWNH2C0QRog8lkvGYcVs8H8E?key=f5bda490de7813605ca24e0573f97339, app_version: 588} @ https://www.gibson.com/web-pixels/strict/app/web-pixel-1962148019@4668795798fc607bb245d7c252a26b3b.js:2
+[   31947ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   31951ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   31959ms] [WARNING] Invalid "this" encountered in addEventListener: undefined @ https://www.gibson.com/cdn/shop/t/592/assets/bundle.main.js?v=41119964797284553131774616305:0
+[   34629ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://identity.gibson.com/houseofstathopoulo.onmicrosoft.com/B2C_1_Gibson_Sign_On/oauth2/v2.0/authorize?scope=openid&response_type=code&state=7JbUJFAQDCLcXdW6&redirect_uri=https%3A%2F%2Fstore.xecurify.com%2Fmoas%2Fbroker%2Flogin%2Foauth%2Fcallback%2F34234&client_id=527e823a-ed0d-4983-8b14-63ac917d1261:0
+[   34986ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://identity.gibson.com/houseofstathopoulo.onmicrosoft.com/B2C_1_Gibson_Sign_On/oauth2/v2.0/src/images/background.png:0
+[   45818ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-180623695%3A1789872584676616&client_id=589262814150-un63urg5od6ikebb6v1o68sgek4f9h9s.apps.googleusercontent.com&o2v=1&redirect_uri=https%3A%2F%2Fidentity.gibson.com%2Fhouseofstathopoulo.onmicrosoft.com%2Foauth2%2Fauthresp&response_type=code&scope=email+profile&service=lso&state=StateProperties%3DeyJTSUQiOiJ4LW1zLWNwaW0tcmM6MmJjYWY0NjMtY2NmZi00ZDVhLWE5ZDItYTk1N2E1ZTMxYjFkIiwiVElEIjoiMjAwYTcwZGUtMWExOC00N2E1LThhMmYtMzk0MzFiMThkZTFjIiwiVE9JRCI6IjU3OTNhYmYzLWRlN2QtNDliNC04Yzg4LTc0MWRhZWYxZjI5NyJ9&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMWJiB4QvMu4IDvhEdwRe870mF_7BkaSuRQ5Y6uQC_GbylnvbU0HMFiP6gx3AA1XQWPOwyTEYFKOi6wSmuk4BZ_bBTsNRyVsL4J-rber3r_2S7LojwDW7D-IPILYx59w0nlFJAslyEsdUltTQ4IX5R4tt0uJ-ZoKy87H5-s9P4vnY2SabhIiZX2ht8Jxg1N-KHK03rUrSTFpVpuCPPYjMLuBKnPXI_-4u4OjUm_tHZSfL_y76NNEHoereaeVPgDq83Oqfja50ZUwvE5qH-C2_7ksePAyasoh5Td10e0AiFcHLdkyGM-fMS6b0zV3OdNAoyjWacNOImfi3BMeI52gDDb4e-L4y5ouA1gL8IT4rVymKrrxclCIgtvmYpN6upM_5Xg2ryfH0t0z6M93OL6vMx8iIfZN74bpCCMmPGMcHbe463upS--8toXVeshaI1_voE9S-SaEWQoHDula7IeNpNUYJD0L6s9OnN258ai4fD9a47U7Ug%26flowName%3DGeneralOAuthFlow%26as%3DS-180623695%253A1789872584676616%26client_id%3D589262814150-un63urg5od6ikebb6v1o68sgek4f9h9s.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fidentity.gibson.com&rart=ANgoxceFWSAw1tKXQphx9H7Sd1GMRWMNFKkHOBjUrXM0jNDRGYDf5d9blHo1WozH4taaiUmJvHkfG2hfL9dbYbbo-bAj46fbsUO10iBXxrqMTDDW-WSkoPM:0
+[   45827ms] [LOG] %c%s color: red; background: yellow; font-size: 24px; AVISO @ https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.AccountsSignInUi.pt_BR.7mPJjpFltO0.es5.O/am=QQQAAABw4I0EAP1vAAABBNsB39cC0AQIGQAAAAAAAAAAwBoAAFQRQA/d=1/excm=_b,_tp,identifierview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlHei8wOW-ZHU61ZEydtxvdXO4DdPg/dti=1/m=_b,_tp:562
+[   45827ms] [LOG] %c%s font-size: 18px; O uso deste console pode permitir que invasores falsifiquem sua identidade para roubar informações por meio de um ataque chamado Self-XSS.
+Não insira nem cole códigos que você não conheça. @ https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.AccountsSignInUi.pt_BR.7mPJjpFltO0.es5.O/am=QQQAAABw4I0EAP1vAAABBNsB39cC0AQIGQAAAAAAAAAAwBoAAFQRQA/d=1/excm=_b,_tp,identifierview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlHei8wOW-ZHU61ZEydtxvdXO4DdPg/dti=1/m=_b,_tp:562
+[   46416ms] [WARNING] The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127 @ :0
+[   46421ms] [WARNING] The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127 @ :0

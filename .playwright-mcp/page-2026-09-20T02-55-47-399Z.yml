@@ -1,0 +1,748 @@
+- webmcp tools (page-provided, untrusted):
+  - browse_store [untrustedContent]: Browse OR navigate to store collections. Set navigate=true whenever the user wants to be taken to a collection page in the browser (triggers: "browse to", "go to", "show me", "open", "take me to", "navigate to" a collection or category). With navigate=false (default), returns collection or product data without changing the page — use this only when the user is asking a question about the catalog, not asking to view it. Without a collection handle, lists all collections. With a handle, returns products from that collection; use "all" to browse everything. Does NOT add anything to the cart; use update_cart for cart changes. Prefer this over search_catalog when the user names a category, collection, or wants to explore. With navigate=true this MOVES the browser to the collection page; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{"collection":{"type":"string","description":"Collection handle to browse (e.g. \"best-sellers\", \"new-arrivals\"). Omit to list all collections. Use \"all\" to browse every product."},"navigate":{"type":"boolean","description":"When true, navigate the browser to the collection page after loading data. Set true for user intents like \"browse to\", \"go to\", \"show me\", \"open\", \"take me to\" a collection. Requires a collection handle. Defaults to false."},"sort_by":{"type":"string","description":"Sort order. Options: best-selling (default), price-ascending, price-descending, title-ascending, title-descending, created-descending, created-ascending."},"page":{"type":"number","description":"Page number for pagination (starts at 1). Each page returns up to 30 products."}}}
+  - cancel_cart: Remove all items from the cart in one step. Use when the user wants to empty their cart or start over.
+    - inputSchema: {"type":"object","properties":{}}
+  - get_cart [readOnly, untrustedContent]: Get the current shopping cart contents — line items with product titles, variant titles, handles, URLs, images, unit prices, quantities, and totals. Everything needed to describe the cart to the user in natural language, without a follow-up get_product call per line. Works from any page.
+    - inputSchema: {"type":"object","properties":{}}
+  - get_product [untrustedContent]: Get product details, OR navigate the browser to the product page. Set catalog.navigate=true whenever the user wants to see/view the product in the browser (triggers: "show me", "open", "view", "go to", "take me to", "navigate to" a product). Set catalog.navigate=false (default) only when you need data (description, options, variants, prices, availability) to answer a question or to prepare an update_cart call — the browser stays on the current page. Defaults to the current page's product if no catalog.id is provided. Does NOT add anything to the cart; use update_cart for that. For a specific variant (color/size/etc.), use show_variant instead — it accepts partial option selections like "purple" without needing every option. With catalog.navigate=true this MOVES the browser to the product page; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{"catalog":{"type":"object","description":"Product detail parameters.","properties":{"id":{"type":"string","description":"Storefront API Product GID, product handle, or product URL path. Custom app product paths and Shopify standard /products/<handle> paths are supported. The id field from search_catalog or browse_store can be passed directly. If omitted, uses the current page's product."},"navigate":{"type":"boolean","description":"When true, navigate the browser to the product page after fetching details. Set true for user intents like \"show me\", \"open\", \"view\", \"go to\", \"take me to\" a product. Defaults to false. If the user specified partial options (e.g. only a color), prefer show_variant with selected_options instead."},"selected_options":{"type":"array","description":"Known product option selections to filter available_options. Use exact option names and values from search_catalog options or a prior get_product available_options entry.","items":{"type":"object","properties":{"name":{"type":"string","description":"Option name, e.g. \"Size\" or \"Color\"."},"value":{"type":"string","description":"Option value, e.g. \"160cm\" or \"Fiberglass\"."}},"required":["name","value"]}}}}}}
+  - manage_orders: Navigate to the customer's order history page. Use when the user asks about past orders, order status, tracking, or returns. The user will be prompted to log in if not already authenticated. This MOVES the browser to the order history page; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{}}
+  - proceed_to_checkout: Proceed to checkout. Verifies the cart is not empty, then MOVES the browser to the checkout page. The tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","properties":{}}
+  - search_catalog [readOnly, untrustedContent]: Search the store catalog for products, collections, articles, and pages. Does NOT add anything to the cart; use update_cart for cart changes. If the user asks for a specific product variant, call get_product after search_catalog to inspect available variants, then show_variant to display one.
+    - inputSchema: {"type":"object","required":["catalog"],"properties":{"catalog":{"type":"object","required":["query"],"properties":{"query":{"type":"string","description":"Search query string."},"pagination":{"type":"object","properties":{"limit":{"type":"integer","description":"Max results per type (1-10). Defaults to 5.","default":5,"minimum":1,"maximum":10}}}}}}}
+  - search_shop_policies_and_faqs [readOnly, untrustedContent]: Used to get facts about the store's policies, FAQ, or contact details.
+When the question is about specific policy kinds, set policy_types to those kinds; leave it unset for general FAQ questions.
+Some examples of questions you can ask are:
+  - What is your return policy? (policy_types: ["refund"])
+  - What is your shipping policy? (policy_types: ["shipping"])
+  - What is your phone number? (policy_types: ["contact"])
+  - What are your hours of operation? (policy_types: ["contact"])
+  - Do you offer gift wrapping? (general FAQ, no specific policy kind — leave policy_types unset)
+
+    - inputSchema: {"type":"object","properties":{"query":{"type":"string","description":"A natural language query. Searches FAQ pages and articles, and routes policies by keyword when policy_types is omitted."},"policy_types":{"type":"array","description":"Policy kinds to fetch, chosen from the user's question — e.g. [\"refund\"] for returns/exchanges, [\"contact\"] for phone/hours/address. Include every kind the question touches. Omit when no specific policy is relevant (e.g. a general FAQ question).","items":{"type":"string","enum":["refund","shipping","privacy","terms_of_service","terms_of_sale","subscription","legal_notice","contact"]}}},"required":["query"]}
+  - show_variant: Navigate the browser to a product page, with a specific variant OR a partial option filter selected. Use for view intents: "show me", "open", "view", "go to", "take me to" a specific product configuration. Accepts EITHER variant_id (fully specified variant) OR selected_options (partial, e.g. only Color=Purple) — with partial options the first matching available variant is picked automatically, so DO NOT ask the user for missing options when their intent is to view. Does NOT add anything to the cart; use update_cart for cart changes. For cart operations you still need a full variant_id — call get_product with the full option combination first. This MOVES the browser to the exact variant page with the variant pre-selected; the tool result then confirms the destination and instructs you not to navigate again — follow it.
+    - inputSchema: {"type":"object","required":["catalog"],"properties":{"catalog":{"type":"object","description":"Provide EITHER variant_id OR selected_options. Handle is required unless the user is already on the product page.","properties":{"handle":{"type":"string","description":"Product handle. If omitted, uses the current product page's handle."},"variant_id":{"type":["string","number"],"description":"ProductVariant ID from get_product variants[].id, e.g. \"gid://shopify/ProductVariant/123\", or the numeric variant ID. Use when the user picked a specific fully-specified variant. Omit when using selected_options."},"selected_options":{"type":"array","description":"Partial (or full) option selections, e.g. [{\"name\":\"Color\",\"value\":\"Purple\"}]. Use when the user names some options but not all (e.g. \"show me the purple shoe\" — pass only Color). The first matching available variant will be selected automatically. Use exact option names and values from get_product available_options or search_catalog options.","items":{"type":"object","properties":{"name":{"type":"string"},"value":{"type":"string"}}}}}}}}
+  - update_cart: Add products to the cart, update line item quantities, or remove items. Batch EVERY change for one request into a SINGLE call — line_items accepts up to 10 entries; do NOT call update_cart once per item. Do NOT retry a call that already returned a result: adds are cumulative, so repeating a call adds duplicate items. Use line_items[].item.id with a ProductVariant GID when the exact variant is known. Use line_items[].id from get_cart to update or remove an existing line, passing the ABSOLUTE target quantity (not a delta; quantity 0 removes the line). Use handle or query only when adding the selected or first available variant.
+    - inputSchema: {"type":"object","required":["cart"],"properties":{"cart":{"type":"object","required":["line_items"],"properties":{"line_items":{"type":"array","description":"Items to add or update (1-10).","items":{"type":"object","properties":{"id":{"type":"string","description":"Existing cart line id from get_cart. Use to update or remove an existing line. Omit when adding new items."},"item":{"type":"object","description":"The merchandise to add.","properties":{"id":{"type":"string","description":"ProductVariant GID from get_product variants[].id, e.g. \"gid://shopify/ProductVariant/123\"."}}},"handle":{"type":"string","description":"Product handle. Adds the selected or first available variant; call get_product first if the user requested specific options."},"query":{"type":"string","description":"Search query to find and add the selected or first available variant. For specific variants, call search_catalog/get_product first and pass item.id."},"quantity":{"type":"integer","description":"Quantity. Defaults to 1 for adds and updates. Set to 0 with an existing line id to remove it.","default":1}}}}}}}}
+
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#MainContent"
+  - region "Announcement" [ref=e6]:
+    - generic [ref=e7]:
+      - link [ref=e8] [cursor=pointer]:
+        - /url: /
+        - paragraph [ref=e9]: Gibson
+      - generic [ref=e10]: "|"
+      - link [ref=e11] [cursor=pointer]:
+        - /url: /pages/epiphone
+        - paragraph [ref=e12]: Epiphone
+      - generic [ref=e13]: "|"
+      - link [ref=e14] [cursor=pointer]:
+        - /url: /pages/kramer
+        - paragraph [ref=e15]: Kramer
+      - generic [ref=e16]: "|"
+      - link [ref=e17] [cursor=pointer]:
+        - /url: /pages/mesa-boogie
+        - paragraph [ref=e18]: Mesa/Boogie
+      - generic [ref=e19]: "|"
+      - link [ref=e20] [cursor=pointer]:
+        - /url: https://www.krkmusic.com/
+        - paragraph [ref=e21]: KRK
+    - navigation [ref=e22]:
+      - heading "Utility menu" [level=2] [ref=e23]
+      - navigation [ref=e24]:
+        - list [ref=e25]:
+          - listitem [ref=e26]:
+            - link "Garage" [ref=e27] [cursor=pointer]:
+              - /url: /pages/gibson-garage
+            - generic [aria-hidden] [ref=e28]: "|"
+          - listitem [ref=e29]:
+            - link "Find Dealer" [ref=e30] [cursor=pointer]:
+              - /url: /pages/gibson-dealer-and-service-center-locator
+            - generic [aria-hidden] [ref=e31]: "|"
+          - listitem [ref=e32]:
+            - link "Support" [ref=e33] [cursor=pointer]:
+              - /url: /pages/gibson-help-center
+            - generic [aria-hidden] [ref=e34]: "|"
+          - listitem [ref=e35]:
+            - link "Gazette" [ref=e36] [cursor=pointer]:
+              - /url: /blogs/gibson-gazette
+  - banner [ref=e38]:
+    - heading [level=1] [ref=e39]:
+      - link "Gibson" [ref=e40] [cursor=pointer]:
+        - /url: /
+    - navigation "Main Menu" [ref=e48]:
+      - list [ref=e49]:
+        - listitem [ref=e50]:
+          - group [ref=e52]:
+            - generic "Guitars" [ref=e53] [cursor=pointer]
+        - listitem [ref=e55]:
+          - group [ref=e57]:
+            - generic "Amps & Effects" [ref=e58] [cursor=pointer]
+        - listitem [ref=e60]:
+          - group [ref=e62]:
+            - generic "Parts & Pickups" [ref=e63] [cursor=pointer]
+        - listitem [ref=e65]:
+          - group [ref=e67]:
+            - generic "Accessories" [ref=e68] [cursor=pointer]
+        - listitem [ref=e70]:
+          - group [ref=e72]:
+            - generic "Lifestyle" [ref=e73] [cursor=pointer]
+        - listitem [ref=e75]:
+          - group [ref=e77]:
+            - generic "Discover" [ref=e78] [cursor=pointer]
+    - generic [ref=e80]:
+      - group [ref=e82]:
+        - generic "Search" [ref=e83] [cursor=pointer]
+      - link "Log in" [ref=e87] [cursor=pointer]:
+        - /url: https://account.gibson.com?locale=en&region_country=US&buyer_flags=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1OWQzYmItYzYubXlzaG9waWZ5LmNvbSIsImZsYWdzIjpbXSwiZXhwIjoxNzkwNDc3NzQ5LCJuYmYiOjE3ODk4NzI5NDl9.9_KMQhKbjoiYv1Ny_3D4S5tj4O331QWXIn3KJy_8jyc
+      - button "Cart" [ref=e93] [cursor=pointer]
+  - main [ref=e98]:
+    - generic [ref=e101]:
+      - generic [ref=e104]:
+        - generic [ref=e110]:
+          - heading "Your Guitar’s Voice, in Higher Definition" [level=2] [ref=e111]
+          - paragraph [ref=e113]: Introducing HiFi DNA™, the game-changing new acoustic guitar pickup collaboration between Gibson and Baggs™
+          - list [ref=e114]:
+            - listitem [ref=e115]:
+              - 'link "Shop Now: Your Guitar’s Voice, in Higher Definition" [ref=e116] [cursor=pointer]':
+                - /url: /collections/gibson-acoustic-guitars-with-baggs-hifi-dna
+                - text: Shop Now
+            - listitem [ref=e117]:
+              - 'link "Learn More: Your Guitar’s Voice, in Higher Definition" [ref=e118] [cursor=pointer]':
+                - /url: /pages/gibson-acoustic-baggs-hifi-dna
+                - text: Learn More
+        - generic [ref=e124]:
+          - heading "Best Sellers" [level=2] [ref=e125]
+          - paragraph [ref=e127]: Shop the best-selling guitars from Gibson and Gibson Custom.
+          - list [ref=e128]:
+            - listitem [ref=e129]:
+              - 'link "Shop Now: Best Sellers" [ref=e130] [cursor=pointer]':
+                - /url: /collections/gibson-best-sellers
+                - text: Shop Now
+        - generic [ref=e136]:
+          - heading "Gibson Garage Miami" [level=2] [ref=e137]
+          - paragraph [ref=e139]: All the highlights from the grand opening week.
+          - list [ref=e140]:
+            - listitem [ref=e141]:
+              - 'link "Learn More: Gibson Garage Miami" [ref=e142] [cursor=pointer]':
+                - /url: /blogs/gibson-gazette/gibson-garage-miami-opening-week-highlights
+                - text: Learn More
+      - generic [ref=e143]:
+        - button "Pause slideshow" [ref=e145] [cursor=pointer]
+        - 'button "Load slide 1 : Your Guitar’s Voice, in Higher Definition" [ref=e151] [cursor=pointer]'
+        - 'button "Load slide 2 : Best Sellers" [ref=e153] [cursor=pointer]'
+        - 'button "Load slide 3 : Gibson Garage Miami" [ref=e155] [cursor=pointer]'
+    - generic [ref=e160]:
+      - link "New Gibson Band Single and DES Series Learn More" [ref=e162] [cursor=pointer]:
+        - /url: /blogs/gibson-gazette/gibson-launches-limited-run-des-series-guitars-and-new-gibson-band-single
+        - generic [ref=e164]:
+          - paragraph [ref=e165]: New Gibson Band Single and DES Series
+          - generic [ref=e166]: Learn More
+      - link "Save 25% on Gibson Strings Shop Now" [ref=e169] [cursor=pointer]:
+        - /url: /collections/gibson-electric-acoustic-and-bass-guitar-strings
+        - generic [ref=e171]:
+          - paragraph [ref=e172]: Save 25% on Gibson Strings
+          - generic [ref=e173]: Shop Now
+      - link "Epiphone Joan Jett Olympic Special Shop Now" [ref=e176] [cursor=pointer]:
+        - /url: /products/epiphone-joan-jett-olympic-special-vintage-sunburst
+        - generic [ref=e178]:
+          - paragraph [ref=e179]: Epiphone Joan Jett Olympic Special
+          - generic [ref=e180]: Shop Now
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - heading "Featured Products" [level=2] [ref=e188]
+          - list [ref=e189]:
+            - listitem [ref=e190]:
+              - link "Miami Garage Celebration Collection" [ref=e191] [cursor=pointer]:
+                - /url: javascript:void(0);
+            - listitem [ref=e192]:
+              - link "Latest Releases" [ref=e193] [cursor=pointer]:
+                - /url: javascript:void(0);
+            - listitem [ref=e194]:
+              - link "Custom Select" [ref=e195] [cursor=pointer]:
+                - /url: javascript:void(0);
+            - listitem [ref=e196]:
+              - link "Gibson Exclusive" [ref=e197] [cursor=pointer]:
+                - /url: javascript:void(0);
+            - listitem [ref=e198]:
+              - link "Gibson Mod™ Collection" [ref=e199] [cursor=pointer]:
+                - /url: javascript:void(0);
+            - listitem [ref=e200]:
+              - link "Gibson Certified Vintage" [ref=e201] [cursor=pointer]:
+                - /url: javascript:void(0);
+        - list [ref=e205]:
+          - listitem [ref=e206]:
+            - link "View All" [ref=e207] [cursor=pointer]:
+              - /url: /collections/miami-garage-celebration-collection
+          - listitem [ref=e208]:
+            - button "Slide left" [ref=e209] [cursor=pointer]
+          - listitem [ref=e214]:
+            - button "Slide right" [ref=e215] [cursor=pointer]
+      - list "Slider" [ref=e221]:
+        - listitem [ref=e222]:
+          - generic [ref=e224]:
+            - generic [ref=e227]:
+              - group "Gustavo Cerati 1965 ES-335, Limited, Exclusive Gibson Custom Sixties Cherry" [ref=e228]:
+                - img "Gibson Custom Gustavo Cerati 1965 ES-335, Sixties Cherry, Limited, Exclusive Electric Guitar Gibson Custom" [ref=e229]
+              - list
+            - generic [ref=e232]:
+              - list [ref=e234]:
+                - listitem [ref=e235]:
+                  - link "New" [ref=e236] [cursor=pointer]:
+                    - /url: /collections/gibson-gibson-custom-latest-releases
+                - listitem [ref=e237]:
+                  - text: "|"
+                  - link "Limited" [ref=e238] [cursor=pointer]:
+                    - /url: /collections/gibson-limited-guitars
+                - listitem [ref=e239]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e240] [cursor=pointer]:
+                    - /url: /collections/shop-all-gibson-exclusives
+              - generic [ref=e241]:
+                - heading "Gustavo Cerati 1965 ES-335, Limited, Exclusive Gibson Custom Sixties Cherry" [level=3]:
+                  - link "Gustavo Cerati 1965 ES-335, Limited, Exclusive Gibson Custom Sixties Cherry" [ref=e242] [cursor=pointer]:
+                    - /url: /products/gibson-custom-gustavo-cerati-1965-es-335-sixties-cherry-limited-exclusive
+                    - text: Gustavo Cerati 1965 ES-335, Limited, Exclusive
+                    - generic [ref=e243]: Gibson Custom
+                    - generic [ref=e244]: Sixties Cherry
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $7,499
+        - listitem [ref=e245]:
+          - generic [ref=e247]:
+            - generic [ref=e248]:
+              - generic [ref=e250]:
+                - group "Flying V 70s, Exclusive Epiphone Vice City Pink" [ref=e251]:
+                  - img "Epiphone Flying V 70s, Vice City Pink, Exclusive Electric Guitar Epiphone" [ref=e252]
+                - list
+              - generic [ref=e253]: Sold out
+            - generic [ref=e257]:
+              - list [ref=e259]:
+                - listitem [ref=e260]:
+                  - link "New" [ref=e261] [cursor=pointer]:
+                    - /url: /collections/epiphone-new-arrivals
+                - listitem [ref=e262]:
+                  - text: "|"
+                  - link "Limited" [ref=e263] [cursor=pointer]:
+                    - /url: /collections/epiphone-limited-guitars
+                - listitem [ref=e264]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e265] [cursor=pointer]:
+                    - /url: /collections/epiphone-exclusive-guitars
+              - generic [ref=e266]:
+                - heading "Flying V 70s, Exclusive Epiphone Vice City Pink Sold out" [level=3]:
+                  - link "Flying V 70s, Exclusive Epiphone Vice City Pink Sold out" [ref=e267] [cursor=pointer]:
+                    - /url: /products/epiphone-flying-v-70s-vice-city-pink-exclusive
+                    - text: Flying V 70s, Exclusive
+                    - generic [ref=e268]: Epiphone
+                    - generic [ref=e269]: Vice City Pink
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $699
+        - listitem [ref=e270]:
+          - generic [ref=e272]:
+            - generic [ref=e273]:
+              - generic [ref=e275]:
+                - group "Explorer, Exclusive Epiphone Vice City Pink" [ref=e276]:
+                  - img "Epiphone Explorer, Vice City Pink, Exclusive Electric Guitar Epiphone" [ref=e277]
+                - list
+              - generic [ref=e278]: Sold out
+            - generic [ref=e282]:
+              - list [ref=e284]:
+                - listitem [ref=e285]:
+                  - link "New" [ref=e286] [cursor=pointer]:
+                    - /url: /collections/epiphone-new-arrivals
+                - listitem [ref=e287]:
+                  - text: "|"
+                  - link "Limited" [ref=e288] [cursor=pointer]:
+                    - /url: /collections/epiphone-limited-guitars
+                - listitem [ref=e289]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e290] [cursor=pointer]:
+                    - /url: /collections/epiphone-exclusive-guitars
+              - generic [ref=e291]:
+                - heading "Explorer, Exclusive Epiphone Vice City Pink Sold out" [level=3]:
+                  - link "Explorer, Exclusive Epiphone Vice City Pink Sold out" [ref=e292] [cursor=pointer]:
+                    - /url: /products/epiphone-explorer-vice-city-pink-exclusive
+                    - text: Explorer, Exclusive
+                    - generic [ref=e293]: Epiphone
+                    - generic [ref=e294]: Vice City Pink
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $699
+        - listitem [ref=e295]:
+          - generic [ref=e297]:
+            - generic [ref=e298]:
+              - generic [ref=e300]:
+                - group "Les Paul Junior Double Cut, Exclusive Gibson Miami Pink" [ref=e301]:
+                  - img "Gibson Les Paul Junior Double Cut, Miami Pink, Exclusive Electric Guitar Gibson" [ref=e302]
+                - list
+              - generic [ref=e303]: Sold out
+            - generic [ref=e307]:
+              - list [ref=e309]:
+                - listitem [ref=e310]:
+                  - link "New" [ref=e311] [cursor=pointer]:
+                    - /url: /collections/gibson-gibson-custom-latest-releases
+                - listitem [ref=e312]:
+                  - text: "|"
+                  - link "Limited" [ref=e313] [cursor=pointer]:
+                    - /url: /collections/gibson-limited-guitars
+                - listitem [ref=e314]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e315] [cursor=pointer]:
+                    - /url: /collections/shop-all-gibson-exclusives
+              - generic [ref=e316]:
+                - heading "Les Paul Junior Double Cut, Exclusive Gibson Miami Pink Sold out" [level=3]:
+                  - link "Les Paul Junior Double Cut, Exclusive Gibson Miami Pink Sold out" [ref=e317] [cursor=pointer]:
+                    - /url: /products/gibson-les-paul-junior-double-cut-miami-pink-exclusive
+                    - text: Les Paul Junior Double Cut, Exclusive
+                    - generic [ref=e318]: Gibson
+                    - generic [ref=e319]: Miami Pink
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $1,699
+        - listitem [ref=e320]:
+          - generic [ref=e322]:
+            - generic [ref=e325]:
+              - group "SG Standard 60s, Exclusive Epiphone Vice City Pink" [ref=e326]:
+                - img "Epiphone SG Standard 60s, Vice City Pink, Exclusive Electric Guitar Epiphone" [ref=e327]
+              - list
+            - generic [ref=e330]:
+              - list [ref=e332]:
+                - listitem [ref=e333]:
+                  - link "New" [ref=e334] [cursor=pointer]:
+                    - /url: /collections/epiphone-new-arrivals
+                - listitem [ref=e335]:
+                  - text: "|"
+                  - link "Limited" [ref=e336] [cursor=pointer]:
+                    - /url: /collections/epiphone-limited-guitars
+                - listitem [ref=e337]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e338] [cursor=pointer]:
+                    - /url: /collections/epiphone-exclusive-guitars
+              - generic [ref=e339]:
+                - heading "SG Standard 60s, Exclusive Epiphone Vice City Pink" [level=3]:
+                  - link "SG Standard 60s, Exclusive Epiphone Vice City Pink" [ref=e340] [cursor=pointer]:
+                    - /url: /products/epiphone-sg-standard-60s-vice-city-pink-exclusive
+                    - text: SG Standard 60s, Exclusive
+                    - generic [ref=e341]: Epiphone
+                    - generic [ref=e342]: Vice City Pink
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $699
+        - listitem [ref=e343]:
+          - generic [ref=e345]:
+            - generic [ref=e348]:
+              - group "Flying V 70s, Exclusive Epiphone Bumblebee Yellow" [ref=e349]:
+                - img "Epiphone Flying V 70s, Bumblebee Yellow, Exclusive Electric Guitar Epiphone" [ref=e350]
+              - list
+            - generic [ref=e353]:
+              - list [ref=e355]:
+                - listitem [ref=e356]:
+                  - link "New" [ref=e357] [cursor=pointer]:
+                    - /url: /collections/epiphone-new-arrivals
+                - listitem [ref=e358]:
+                  - text: "|"
+                  - link "Limited" [ref=e359] [cursor=pointer]:
+                    - /url: /collections/epiphone-limited-guitars
+                - listitem [ref=e360]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e361] [cursor=pointer]:
+                    - /url: /collections/epiphone-exclusive-guitars
+              - generic [ref=e362]:
+                - heading "Flying V 70s, Exclusive Epiphone Bumblebee Yellow" [level=3]:
+                  - link "Flying V 70s, Exclusive Epiphone Bumblebee Yellow" [ref=e363] [cursor=pointer]:
+                    - /url: /products/epiphone-flying-v-70s-bumblebee-yellow-exclusive
+                    - text: Flying V 70s, Exclusive
+                    - generic [ref=e364]: Epiphone
+                    - generic [ref=e365]: Bumblebee Yellow
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $699
+        - listitem [ref=e366]:
+          - generic [ref=e368]:
+            - generic [ref=e369]:
+              - generic [ref=e371]:
+                - group "Les Paul Special, Exclusive Gibson Miami Pink" [ref=e372]:
+                  - img "Gibson Les Paul Special, Miami Pink, Exclusive Electric Guitar Gibson" [ref=e373]
+                - list
+              - generic [ref=e374]: Sold out
+            - generic [ref=e378]:
+              - list [ref=e380]:
+                - listitem [ref=e381]:
+                  - link "New" [ref=e382] [cursor=pointer]:
+                    - /url: /collections/gibson-gibson-custom-latest-releases
+                - listitem [ref=e383]:
+                  - text: "|"
+                  - link "Limited" [ref=e384] [cursor=pointer]:
+                    - /url: /collections/gibson-limited-guitars
+                - listitem [ref=e385]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e386] [cursor=pointer]:
+                    - /url: /collections/shop-all-gibson-exclusives
+              - generic [ref=e387]:
+                - heading "Les Paul Special, Exclusive Gibson Miami Pink Sold out" [level=3]:
+                  - link "Les Paul Special, Exclusive Gibson Miami Pink Sold out" [ref=e388] [cursor=pointer]:
+                    - /url: /products/gibson-les-paul-special-miami-pink-exclusive
+                    - text: Les Paul Special, Exclusive
+                    - generic [ref=e389]: Gibson
+                    - generic [ref=e390]: Miami Pink
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $1,799
+        - listitem [ref=e391]:
+          - generic [ref=e393]:
+            - generic [ref=e396]:
+              - group "Explorer, Exclusive Epiphone Bumblebee Yellow" [ref=e397]:
+                - img "Epiphone Explorer, Bumblebee Yellow, Exclusive Electric Guitar Epiphone" [ref=e398]
+              - list
+            - generic [ref=e401]:
+              - list [ref=e403]:
+                - listitem [ref=e404]:
+                  - link "New" [ref=e405] [cursor=pointer]:
+                    - /url: /collections/epiphone-new-arrivals
+                - listitem [ref=e406]:
+                  - text: "|"
+                  - link "Limited" [ref=e407] [cursor=pointer]:
+                    - /url: /collections/epiphone-limited-guitars
+                - listitem [ref=e408]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e409] [cursor=pointer]:
+                    - /url: /collections/epiphone-exclusive-guitars
+              - generic [ref=e410]:
+                - heading "Explorer, Exclusive Epiphone Bumblebee Yellow" [level=3]:
+                  - link "Explorer, Exclusive Epiphone Bumblebee Yellow" [ref=e411] [cursor=pointer]:
+                    - /url: /products/epiphone-explorer-bumblebee-yellow-exclusive
+                    - text: Explorer, Exclusive
+                    - generic [ref=e412]: Epiphone
+                    - generic [ref=e413]: Bumblebee Yellow
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $699
+        - listitem [ref=e414]:
+          - generic [ref=e416]:
+            - generic [ref=e419]:
+              - group "SG Standard '61 Stop Bar, Exclusive Gibson Miami Pink" [ref=e420]:
+                - img "Gibson SG Standard '61 Stop Bar, Miami Pink, Exclusive Electric Guitar Gibson" [ref=e421]
+              - list
+            - generic [ref=e424]:
+              - list [ref=e426]:
+                - listitem [ref=e427]:
+                  - link "New" [ref=e428] [cursor=pointer]:
+                    - /url: /collections/gibson-gibson-custom-latest-releases
+                - listitem [ref=e429]:
+                  - text: "|"
+                  - link "Limited" [ref=e430] [cursor=pointer]:
+                    - /url: /collections/gibson-limited-guitars
+                - listitem [ref=e431]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e432] [cursor=pointer]:
+                    - /url: /collections/shop-all-gibson-exclusives
+              - generic [ref=e433]:
+                - heading "SG Standard '61 Stop Bar, Exclusive Gibson Miami Pink" [level=3]:
+                  - link "SG Standard '61 Stop Bar, Exclusive Gibson Miami Pink" [ref=e434] [cursor=pointer]:
+                    - /url: /products/gibson-sg-standard-61-stop-bar-miami-pink-exclusive
+                    - text: SG Standard '61 Stop Bar, Exclusive
+                    - generic [ref=e435]: Gibson
+                    - generic [ref=e436]: Miami Pink
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $1,999
+        - listitem [ref=e437]:
+          - generic [ref=e439]:
+            - generic [ref=e442]:
+              - group "Flying V, Exclusive Epiphone Vice City Blue" [ref=e443]:
+                - img "Epiphone Flying V, Vice City Blue, Exclusive Electric Guitar Epiphone" [ref=e444]
+              - list
+            - generic [ref=e447]:
+              - list [ref=e449]:
+                - listitem [ref=e450]:
+                  - link "New" [ref=e451] [cursor=pointer]:
+                    - /url: /collections/epiphone-new-arrivals
+                - listitem [ref=e452]:
+                  - text: "|"
+                  - link "Limited" [ref=e453] [cursor=pointer]:
+                    - /url: /collections/epiphone-limited-guitars
+                - listitem [ref=e454]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e455] [cursor=pointer]:
+                    - /url: /collections/epiphone-exclusive-guitars
+              - generic [ref=e456]:
+                - heading "Flying V, Exclusive Epiphone Vice City Blue" [level=3]:
+                  - link "Flying V, Exclusive Epiphone Vice City Blue" [ref=e457] [cursor=pointer]:
+                    - /url: /products/epiphone-flying-v-vice-city-blue-exclusive
+                    - text: Flying V, Exclusive
+                    - generic [ref=e458]: Epiphone
+                    - generic [ref=e459]: Vice City Blue
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $699
+        - listitem [ref=e460]:
+          - generic [ref=e462]:
+            - generic [ref=e465]:
+              - group "Explorer, Exclusive Epiphone Vice City Blue" [ref=e466]:
+                - img "Epiphone Explorer, Vice City Blue, Exclusive Electric Guitar Epiphone" [ref=e467]
+              - list
+            - generic [ref=e470]:
+              - list [ref=e472]:
+                - listitem [ref=e473]:
+                  - link "New" [ref=e474] [cursor=pointer]:
+                    - /url: /collections/epiphone-new-arrivals
+                - listitem [ref=e475]:
+                  - text: "|"
+                  - link "Limited" [ref=e476] [cursor=pointer]:
+                    - /url: /collections/epiphone-limited-guitars
+                - listitem [ref=e477]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e478] [cursor=pointer]:
+                    - /url: /collections/epiphone-exclusive-guitars
+              - generic [ref=e479]:
+                - heading "Explorer, Exclusive Epiphone Vice City Blue" [level=3]:
+                  - link "Explorer, Exclusive Epiphone Vice City Blue" [ref=e480] [cursor=pointer]:
+                    - /url: /products/epiphone-explorer-vice-city-blue-exclusive
+                    - text: Explorer, Exclusive
+                    - generic [ref=e481]: Epiphone
+                    - generic [ref=e482]: Vice City Blue
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $699
+        - listitem [ref=e483]:
+          - generic [ref=e485]:
+            - generic [ref=e488]:
+              - group "Les Paul Junior Double Cut, Exclusive Gibson Miami Blue" [ref=e489]:
+                - img "Gibson Les Paul Junior Double Cut, Miami Blue, Exclusive Electric Guitar Gibson" [ref=e490]
+              - list
+            - generic [ref=e493]:
+              - list [ref=e495]:
+                - listitem [ref=e496]:
+                  - link "New" [ref=e497] [cursor=pointer]:
+                    - /url: /collections/gibson-gibson-custom-latest-releases
+                - listitem [ref=e498]:
+                  - text: "|"
+                  - link "Limited" [ref=e499] [cursor=pointer]:
+                    - /url: /collections/gibson-limited-guitars
+                - listitem [ref=e500]:
+                  - text: "|"
+                  - link "Exclusive" [ref=e501] [cursor=pointer]:
+                    - /url: /collections/shop-all-gibson-exclusives
+              - generic [ref=e502]:
+                - heading "Les Paul Junior Double Cut, Exclusive Gibson Miami Blue" [level=3]:
+                  - link "Les Paul Junior Double Cut, Exclusive Gibson Miami Blue" [ref=e503] [cursor=pointer]:
+                    - /url: /products/gibson-les-paul-junior-double-cut-miami-blue-exclusive
+                    - text: Les Paul Junior Double Cut, Exclusive
+                    - generic [ref=e504]: Gibson
+                    - generic [ref=e505]: Miami Blue
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: Regular price
+                      - generic: $1,699
+    - banner [ref=e509]:
+      - generic [ref=e514]:
+        - 'heading "Backstage Heroes, Episode 2: Mike \"Sarge\" Cole" [level=1] [ref=e515]'
+        - heading "Meet the people who have brought thousands of Gibson guitars to life, including yours." [level=2] [ref=e516]
+        - list [ref=e517]:
+          - listitem [ref=e518]:
+            - 'link "Watch Now: Backstage Heroes, Episode 2: Mike \"Sarge\" Cole" [ref=e519] [cursor=pointer]':
+              - /url: /blogs/gibson-gazette/gibson-tv-presents-backstage-heroes-episode-two-featuring-mike-sarge-cole
+              - text: Watch Now
+    - generic [ref=e524]:
+      - 'link "Tobias Sale: 20% Off Shop Now" [ref=e526] [cursor=pointer]':
+        - /url: /collections/tobias
+        - generic [ref=e528]:
+          - paragraph [ref=e529]: "Tobias Sale: 20% Off"
+          - generic [ref=e530]: Shop Now
+      - link "Gibson Exclusives Shop Now" [ref=e533] [cursor=pointer]:
+        - /url: /collections/all-exclusive-gibson-guitars
+        - generic [ref=e535]:
+          - paragraph [ref=e536]: Gibson Exclusives
+          - generic [ref=e537]: Shop Now
+    - banner [ref=e540]:
+      - generic [ref=e545]:
+        - heading "Learn Guitar Now" [level=1] [ref=e546]
+        - heading "Get three months of the Gibson App free with guitar and amp purchases on Gibson.com" [level=2] [ref=e547]
+        - list [ref=e548]:
+          - listitem [ref=e549]:
+            - 'link "Learn More: Learn Guitar Now" [ref=e550] [cursor=pointer]':
+              - /url: /blogs/gibson-gazette/why-do-i-need-the-gibson-app
+              - text: Learn More
+          - listitem [ref=e551]:
+            - 'link "Start Free Trial: Learn Guitar Now" [ref=e552] [cursor=pointer]':
+              - /url: https://www.gibson.app/
+              - text: Start Free Trial
+  - contentinfo [ref=e554]:
+    - generic [ref=e556]:
+      - generic [ref=e557]:
+        - heading "Company" [level=2] [ref=e558]
+        - list [ref=e559]:
+          - listitem [ref=e560]:
+            - link "Gibson Leadership" [ref=e561] [cursor=pointer]:
+              - /url: /pages/gibson-leadership
+          - listitem [ref=e562]:
+            - link "Gibson Gives" [ref=e563] [cursor=pointer]:
+              - /url: https://www.gibsonfoundation.org/
+          - listitem [ref=e564]:
+            - link "Gibson Generation Group" [ref=e565] [cursor=pointer]:
+              - /url: https://g3.gibson.com/
+          - listitem [ref=e566]:
+            - link "Terms & Conditions" [ref=e567] [cursor=pointer]:
+              - /url: /policies/terms-of-service
+          - listitem [ref=e568]:
+            - link "Privacy Policy" [ref=e569] [cursor=pointer]:
+              - /url: /policies/privacy-policy
+          - listitem [ref=e570]:
+            - link "Promotional Terms & Conditions" [ref=e571] [cursor=pointer]:
+              - /url: /pages/promotional-terms-and-conditions
+      - generic [ref=e572]:
+        - heading "Resources" [level=2] [ref=e573]
+        - list [ref=e574]:
+          - listitem [ref=e575]:
+            - link "Serial Number FAQ" [ref=e576] [cursor=pointer]:
+              - /url: /pages/serial-number-search
+          - listitem [ref=e577]:
+            - link "Gibson App" [ref=e578] [cursor=pointer]:
+              - /url: https://gibson.app
+          - listitem [ref=e579]:
+            - link "Financing" [ref=e580] [cursor=pointer]:
+              - /url: /pages/gibson-financing-with-synchrony
+          - listitem [ref=e581]:
+            - link "Careers" [ref=e582] [cursor=pointer]:
+              - /url: /pages/careers
+          - listitem [ref=e583]:
+            - link "Register Your Guitar" [ref=e584] [cursor=pointer]:
+              - /url: /pages/register-your-product
+          - listitem [ref=e585]:
+            - link "Warranty Lookup" [ref=e586] [cursor=pointer]:
+              - /url: /pages/warranty-lookup
+          - listitem [ref=e587]:
+            - link "User Manuals" [ref=e588] [cursor=pointer]:
+              - /url: /pages/user-manuals
+          - listitem [ref=e589]:
+            - link "Gibson Guitar Specs (2015-2019)" [ref=e590] [cursor=pointer]:
+              - /url: https://legacy.gibson.com/
+          - listitem [ref=e591]:
+            - link "Gibson Fan-Use License Program" [ref=e592] [cursor=pointer]:
+              - /url: https://forms.monday.com/forms/4223a3a524f233e68d953e9af9599111?r=use1
+          - listitem [ref=e593]:
+            - link "Photography Credits" [ref=e594] [cursor=pointer]:
+              - /url: /pages/gibson-com-photography-credits
+      - generic [ref=e595]:
+        - heading "Support" [level=2] [ref=e596]
+        - list [ref=e597]:
+          - listitem [ref=e598]:
+            - link "Contact Us" [ref=e599] [cursor=pointer]:
+              - /url: /pages/contact-support
+          - listitem [ref=e600]:
+            - link "Gibson Help Center" [ref=e601] [cursor=pointer]:
+              - /url: /pages/gibson-help-center
+          - listitem [ref=e602]:
+            - link "Returns" [ref=e603] [cursor=pointer]:
+              - /url: /pages/start-a-return
+          - listitem [ref=e604]:
+            - link "Repair & Restoration" [ref=e605] [cursor=pointer]:
+              - /url: /pages/repair-restoration
+          - listitem [ref=e606]:
+            - link "Report Fakes & Scams" [ref=e607] [cursor=pointer]:
+              - /url: https://forms.monday.com/forms/41eba6904d716fc521b809bbc64d5816?r=use1
+          - listitem [ref=e608]:
+            - link "Authorized Online Dealers" [ref=e609] [cursor=pointer]:
+              - /url: /pages/authorized-online-retailers
+          - listitem [ref=e610]:
+            - link "Dealers and Service Centers" [ref=e611] [cursor=pointer]:
+              - /url: /pages/find-a-store
+          - listitem [ref=e612]:
+            - link "Frequently Asked Questions" [ref=e613] [cursor=pointer]:
+              - /url: /pages/gibson-help-center-faqs
+          - listitem [ref=e614]:
+            - link "Online Store Policies" [ref=e615] [cursor=pointer]:
+              - /url: /pages/online-store-policies
+          - listitem [ref=e616]:
+            - link "Gibson Garage Store Policies" [ref=e617] [cursor=pointer]:
+              - /url: /pages/gibson-garage-store-policies
+      - generic [ref=e618]:
+        - generic [ref=e619]:
+          - heading "Gibson Newsletter" [level=2] [ref=e620]
+          - paragraph [ref=e621]: Subscribe to our emails
+          - generic [ref=e628]:
+            - banner
+            - textbox [ref=e633]:
+              - /placeholder: Email address
+            - generic [ref=e634]:
+              - button [ref=e635] [cursor=pointer]
+              - paragraph
+        - list [ref=e638]:
+          - listitem [ref=e639]:
+            - link "Instagram" [ref=e640] [cursor=pointer]:
+              - /url: https://instagram.com/GibsonGuitar
+          - listitem [ref=e644]:
+            - link "X (Twitter)" [ref=e645] [cursor=pointer]:
+              - /url: https://x.com/GibsonGuitar
+          - listitem [ref=e649]:
+            - link "YouTube" [ref=e650] [cursor=pointer]:
+              - /url: https://www.youtube.com/c/gibsonguitar
+          - listitem [ref=e654]:
+            - link "Facebook" [ref=e655] [cursor=pointer]:
+              - /url: https://facebook.com/Gibson
+          - listitem [ref=e659]:
+            - link "TikTok" [ref=e660] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@officialgibsonguitar
+    - generic [ref=e664]:
+      - generic [ref=e666]:
+        - generic [ref=e669]:
+          - generic [ref=e670]: Country/region
+          - button "United States | USD $" [ref=e672] [cursor=pointer]
+        - generic [ref=e682]:
+          - heading "Language" [level=2] [ref=e683]
+          - button "English" [ref=e685] [cursor=pointer]
+      - list [ref=e688]:
+        - listitem [ref=e689]:
+          - link "Privacy Policy" [ref=e690] [cursor=pointer]:
+            - /url: /policies/privacy-policy
+        - listitem [ref=e691]:
+          - button "Cookies Settings" [ref=e692] [cursor=pointer]
+        - listitem [ref=e693]:
+          - paragraph [ref=e694]:
+            - text: Copyright © 2026,
+            - link "Gibson" [ref=e695] [cursor=pointer]:
+              - /url: /
+            - text: All Rights Reserved.
